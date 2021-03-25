@@ -50,14 +50,10 @@ for s in range(nt):
         Pxx[inputpointx, inputpointy] = 0
 
     # 波の伝わり方の計算
-    Ux[1: nx, 0: ny] = Ux[1: nx, 0: ny] - \
-        (1/rhow) * (dt/dx) * (Pxx[1: nx, 0: ny] - Pxx[0: nx-1, 0: ny])
-    Uy[0: nx, 1: ny] = Uy[0: nx, 1: ny] - \
-        (1/rhow) * (dt/dy) * (Pxx[0: nx, 1: ny] - Pxx[0: nx, 0: ny-1])
+    Ux[1: nx, 0: ny] = Ux[1: nx, 0: ny] - (1/rhow) * (dt/dx) * (Pxx[1: nx, 0: ny] - Pxx[0: nx-1, 0: ny])
+    Uy[0: nx, 1: ny] = Uy[0: nx, 1: ny] - (1/rhow) * (dt/dy) * (Pxx[0: nx, 1: ny] - Pxx[0: nx, 0: ny-1])
 
-    Pxx[0: nx, 0: ny] = Pxx[0: nx, 0: ny] - rhow * \
-        vertical_wave_sound_velocity ** 2 * dt * ((1/dx)*(Ux[1: nx+1, 0: ny]-\
-        Ux[0: nx, 0: ny]) + (1/dy)*(Uy[0: nx, 1: ny+1]-Uy[0: nx, 0: ny]))
+    Pxx[0: nx, 0: ny] = Pxx[0: nx, 0: ny] - rhow * vertical_wave_sound_velocity ** 2 * dt * ((1/dx)*(Ux[1: nx+1, 0: ny]- Ux[0: nx, 0: ny]) + (1/dy)*(Uy[0: nx, 1: ny+1]-Uy[0: nx, 0: ny]))
 
 # シミュレーションの表示
     if s % 5 == 0:
